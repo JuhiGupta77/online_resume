@@ -1,0 +1,10 @@
+django
+Pillow
+django-ckeditor
+
+# os (comes default with python) imported in settings.py due to use of static files
+
+# commands
+# django-admin startproject resume_demo
+# cd resume_Demo
+# django-admin startapp main

@@ -120,6 +120,8 @@ class Portfolio(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to="portfolio")
     # A Slug is basically a short label for something, containing only letters, numbers, underscores or hyphens.
     # They’re generally used in URLs.
+    # A "slug" is a way of generating a valid URL, generally using data already obtained.
+    # it is created from the title by down-casing all letters, and replacing spaces by hyphens -
     slug = models.SlugField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
 

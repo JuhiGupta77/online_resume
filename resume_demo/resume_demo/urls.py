@@ -18,7 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("main.urls"), namespace="main"),
+    path('', include("ResumeApp.urls"), namespace="ResumeApp"),
 ]
 
 # For adding/uploading avatar or photo will be automatically be added in the static and media directory

@@ -9,4 +9,4 @@ class MainConfig(AppConfig):
     # Way to connect the signal with the function:
     # Need to connect the signals file with the app.py file ready function in order to use them.
     def ready(self):
-        import main.signals
+        import ResumeApp.signals

@@ -14,7 +14,8 @@ class Skill(models.Model):
     name = models.CharField(max_length=20, blank=True, null=True)
     # score in form of sliding bar of the skill score
     score = models.IntegerField(default=80, blank=True, null=True)
-    # images for each key skill
+    # images for each key skill will be uploaded to skills folder inside mediafiles directory (created automatically)
+    # when uploaded in skill admin page
     image = models.FileField(blank=True, null=True, upload_to="skills")
     # if True is a skill else is a coding skill
     is_key_skill = models.BooleanField(default=False)
@@ -38,14 +39,14 @@ class UserProfile(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     skills = models.ManyToManyField(Skill, blank=True)
-    # uploaded to "cv" directory
+    # uploaded to "cv" directory for uploading files (cv/resume)
     cv = models.FileField(blank=True, null=True, upload_to="cv")
 
     class Meta:
         verbose_name_plural = 'User Profiles'
         verbose_name = 'User Profile'
 
-    # returns firstname and lastname of user model
+    # returns first-name and last-name of user model
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
 

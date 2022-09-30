@@ -1,12 +1,18 @@
-{% load static %}
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}{%endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="author" content="Did Coding Limited & James Granger Design">
+    <!-- path to context_processors -->
+    <!-- Canonical url is a url that tell search engine ( google, bing etc ) which url is the primary url
+    for same content web pages. It is used to fix the duplicate content issue with different webpage url formats.
+    So that search engine will know all the url that generate same web content is belongs to one canonical url.
+    For example https://www.google.com and https://www.google.com/?abc point to the same web page content,
+    so the canonical url for those two pages is https://www.google.com. -->
     <link rel="canonical" href="{{request.path}}"/>
     <link rel="home" href="{% url 'ResumeApp:home' %}"/>
     <meta name="description" content="{% block description %}{% endblock %}">
@@ -21,7 +27,7 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7.0.5/swiper-bundle.min.css">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    {% block extend_header%}{%endblock%}
+    {% block extend_header %}{% endblock %}
     <!-- ================================
     End CSS
     ================================= -->
@@ -43,7 +49,7 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://unpkg.com/swiper@7.0.5/swiper-bundle.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
-    {% block extend_footer %}{%endblock%}
+    {% block extend_footer %}{% endblock %}
     <!-- ================================
     End Scripts
     ================================= -->

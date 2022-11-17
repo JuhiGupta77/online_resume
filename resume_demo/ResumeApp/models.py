@@ -1,3 +1,5 @@
+# models are translated into database tables, model name become database name and fields become its columns
+# each object saved become each row of that table
 from django.db import models
 # for user profiles usage
 from django.contrib.auth.models import User
@@ -17,11 +19,35 @@ class Skill(models.Model):
     # images for each key skill will be uploaded to skills folder inside mediafiles directory (created automatically)
     # when uploaded in skill admin page
     image = models.FileField(blank=True, null=True, upload_to="skills")
-    # if True is a skill else is a coding skill
+    # True if is a skill else is a coding skill
     is_key_skill = models.BooleanField(default=False)
 
+    # What a class Meta is, if you're familiar with HTML, meta is just data about something, a web page,
+    # or a database table. It doesn't alter the function of the item, it just tells about the data.
+    # In HTML, the keywords and description content in the head tag is meta data. It just tells us about the page.
+    # In Django, we use meta data about a database table to tell Django things about the database table.
     class Meta:
+        # verbose_name_plural: defines the plural name for the object
+        # If this isn’t given, Django will use verbose_name + "s".
+        # verbose_name and verbose_name_plural:
+        # If you're familiar with database tables in Django, you know that the table name should be declared to be a
+        # singular form, because in the admin page of Django, it ends with pluralizing the table name.
+        # This is because a table is really a representation of objects. So if you declare name such as Comment,
+        # it really is a collection of Comments (so Django automatically pluralizes it in the admin page once the
+        # database table is created and registered).
+        #
+        # By default, Django adds a 's' to a table name in the admin page.
+        #
+        # However, this doesn't always work. For example, if a database table called 'Child',
+        # the plural of 'Child' is really 'Children', not 'Childs'.
+        # If you create a database table called 'Child' and register it in the admin.py file and go to the admin page,
+        # you'll see 'Childs'.
+        # So there is a way in Django, you can explicitly declare what the singular form of the database objects
+        # should be and what the plural form of the database objects should be.
+        # And this can be done by using verbose_name and verbose_name_plural attributes.
         verbose_name_plural = 'Skills'
+        # verbose_name is pretty much the equivalent of the label attribute for forms.
+        # verbose_name is what is used to give labels to forms.
         verbose_name = 'Skill'
 
     # returns a skill name
@@ -117,6 +143,7 @@ class Portfolio(models.Model):
     date = models.DateTimeField(blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
+    # RichTextField is being used by ckeditor
     body = RichTextField(blank=True, null=True)
     image = models.ImageField(blank=True, null=True, upload_to="portfolio")
     # A Slug is basically a short label for something, containing only letters, numbers, underscores or hyphens.

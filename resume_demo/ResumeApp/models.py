@@ -88,6 +88,16 @@ class ContactProfile(models.Model):
     class Meta:
         verbose_name_plural = 'Contact Profiles'
         verbose_name = 'Contact Profile'
+        # The default ordering for the object, for use when obtaining lists of objects.
+        # This is a tuple or list of strings and/or query expressions.
+        # Each string is a field name with an optional “-” prefix, which indicates descending order.
+        # Fields without a leading “-” will be ordered ascending. Use the string “?” to order randomly.
+        # Ordering is not a free operation. Each field you add to the ordering incurs a cost to your database.
+        # Each foreign key you add will implicitly include all of its default orderings as well.
+        # If a query doesn’t have an ordering specified, results are returned from the database in an unspecified order.
+        # A particular ordering is guaranteed only when ordering by a set of fields that uniquely identify each object
+        # in the results. For example, if a name field isn’t unique, ordering by it won’t guarantee objects with the
+        # same name always appear in the same order.
         ordering = ["timestamp"]
 
     def __str__(self):
@@ -168,7 +178,7 @@ class Portfolio(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f"/portfolio/{self.slug}"
+        return "/portfolio/%s/" % self.slug
 
 
 # same as portfolio page
@@ -178,6 +188,9 @@ class Blog(models.Model):
     author = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
+    # RichTextField is generally used for storing paragraphs that can store any type of data.
+    # Rich text is the text that is formatted with common formatting options, such as bold, italics, images, URLs
+    # that are unavailable with plain text.
     body = RichTextField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
     image = models.ImageField(blank=True, null=True, upload_to="blog")
@@ -196,8 +209,10 @@ class Blog(models.Model):
     def __str__(self):
         return self.name
 
+    # Define a get_absolute_url() method to tell Django how to calculate the canonical URL for an object.
+    # To callers, this method should appear to return a string that can be used to refer to the object over HTTP.
     def get_absolute_url(self):
-        return f"/blog/{self.slug}"
+        return "/blog/%s/" % self.slug
 
 
 class Certificate(models.Model):

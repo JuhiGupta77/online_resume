@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# URL namespaces allow you to uniquely reverse named URL patterns even if different applications use the same URL names.
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("ResumeApp.urls", namespace="ResumeApp")),

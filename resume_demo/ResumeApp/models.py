@@ -4,6 +4,7 @@ from django.db import models
 # for user profiles usage
 from django.contrib.auth.models import User
 # slug for our profile and blog
+# importing slugify function
 from django.template.defaultfilters import slugify
 # can add rich text filed to our blog and profile
 from ckeditor.fields import RichTextField
@@ -73,6 +74,7 @@ class UserProfile(models.Model):
         verbose_name = 'User Profile'
 
     # returns first-name and last-name of user model
+    # f-strings are evaluated at runtime, you can put any and all valid Python expressions in them.
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
@@ -132,8 +134,13 @@ class Media(models.Model):
     is_image = models.BooleanField(default=True)
 
     # custom save() method
+    # save() method from its parent class is to be overridden so we use super keyword.
+    # The save method is an inherited method from models.
+    # Model which is executed to save an instance into a particular Model.
+    # Whenever one tries to create an instance of a model either from
+    # admin interface or django shell, save() function is run.
     def save(self, *args, **kwargs):
-        # if url esists then is_image validation becomes false
+        # if url exists then is_image validation becomes false
         if self.url:
             self.is_image = False
         super(Media, self).save(*args, **kwargs)
@@ -165,7 +172,10 @@ class Portfolio(models.Model):
 
     def save(self, *args, **kwargs):
         # we slugify i.e. all letters become small-case and spaces join and become _
+        # Be aware that your URL could change when the name field is edited,
+        # which can cause broken links. It may be preferable to generate the slug only once when you create a new object
         if not self.id:
+            # need to call slugify function to create slug field in Django
             self.slug = slugify(self.name)
         super(Portfolio, self).save(*args, **kwargs)
 

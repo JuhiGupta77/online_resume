@@ -21,3 +21,10 @@ sqlparse==0.4.2
 
 # created requirements.txt file using commandline (will create file with all requirements automatically):
 # pip freeze > requirements.txt
+
+### adding app name at the end of the command will make migrations folder and add migration files to the specified app
+### if not done would NOT make the app run using runserver, will result in "no such table"
+### by default migrations folder is not pushed to Git
+# Python manage.py makemigrations ResumeApp (app name)
+# Python manage.py migrate ResumeApp (app name)
+# Python manage.py runserver

@@ -5,6 +5,7 @@ app_name = "ResumeApp"
 
 urlpatterns = [
     # for class based views we use .as_view(); for function-based view we don't need them
+    # homepage
     path('', views.IndexView.as_view(), name="home"),
     path('contact/', views.ContactView.as_view(), name="contact"),
     path('portfolio/', views.PortfolioView.as_view(), name="portfolios"),

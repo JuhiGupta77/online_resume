@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+# importing os module to make use of static files i.e. join base directory to static directory
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -65,7 +66,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # added our own created context_processor here to be accessable in whole project
+                # added our own created context_processor here to be accesable in whole project
+                # By this we could easily be using the keyword "me" \
+                # (defined in context_processor function) in our templates
                 'resume_demo.context_processors.project_context',
             ],
         },
@@ -120,12 +123,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# Removed STATICFILES base directory default defination and
 # Added static and media root paths
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "media")
 ]
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/"staticfiles"
 
 MEDIA_URL = '/media/'

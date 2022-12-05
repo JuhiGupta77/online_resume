@@ -30,7 +30,7 @@ sqlparse==0.4.2
 # Python manage.py runserver
 
 # First, create the virtual environment
-# 
+#
 # python3 -m venv django-env
 # Then, use this environment
 #
